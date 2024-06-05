@@ -32,26 +32,37 @@ class RetailEnvironment:
         self.render_state = self.state.copy()
         
         self.action_space = list(range(self.max_order + 1))
+        
+        np.random.seed(17)
+        print('environment created')
+    def step(self, action):
+        self.action = action
+        self.demand = round(np.random.gamma(self.shape, self.scale))
+        demand = self.demand
+        
+        next_state = self.state[1:] + [action]
+        self.render_state = next_state.copy()
+        
+        print(next_state)
+        
+        calc_state = next_state.copy()
+        if self.use_FIFO:
+            for i in range(self.Life_time):
+                demand, next_state[-i-1] = self.update_demand(demand, calc_state[-i-1])
+        if self.use_LIFO:
+            for i in range(self.Lead_time, self.Lead_time + self.Life_time):
+                demand, next_state[i] = self.update_demand(demand, calc_state[i])
+        
+        calc_state = next_state.copy()
+        next_state = [0] + calc_state[:-1]
+        
+    def update_demand(self, demand, state):
+        demand_used = min(demand, state)
+        demand -= demand_used
+        state -= demand_used
+        return demand, max(state, 0)
+    
     
     @classmethod
     def from_dict(cls, config_dict):
         return cls(config_dict)
-
-
-config = {
-    'life_time': 10,
-    'lead_time': 5,
-    'mean_demand': 10.0,
-    'coefficient_of_variation': 0.5,
-    'max_order': 20,
-    'order_cost': 10.0,
-    'outdated_cost': 5.0,
-    'lost_sales_cost': 20.0,
-    'holding_cost': 1.0,
-    'use_FIFO': True,
-    'use_LIFO': False,
-    'simulation_time': 100,
-    'warmup_period': 20
-}
-
-env = RetailEnvironment.from_dict(config)
