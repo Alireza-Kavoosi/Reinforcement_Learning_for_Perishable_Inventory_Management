@@ -1,6 +1,7 @@
 from environment_train import RetailEnvironment
+from DQN import DQN_Agent
 
-config = {
+env_config = {
     'life_time': 10,
     'lead_time': 5,
     'mean_demand': 10.0,
@@ -16,4 +17,7 @@ config = {
     'warmup_period': 20
 }
 
-env = RetailEnvironment.from_dict(config)
+DQN_config = {
+    'gamma' : 0.99
+}
+env = RetailEnvironment.from_dict(env_config)

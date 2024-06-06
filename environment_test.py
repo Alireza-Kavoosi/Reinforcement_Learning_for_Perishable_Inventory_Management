@@ -4,21 +4,21 @@ import math
 import copy
 
 class RetailEnvironment:
-    def __init__(self, config):
-        self.config = config
-        self.Life_time = config['life_time']
-        self.Lead_time = config['lead_time']
-        self.mean_demand = config['mean_demand']
-        self.coefficient_of_variation = config['coefficient_of_variation']
-        self.max_order = config['max_order']
-        self.order_cost = config['order_cost']
-        self.outdated_cost = config['outdated_cost']
-        self.lost_sales_cost = config['lost_sales_cost']
-        self.holding_cost = config['holding_cost']
-        self.use_FIFO = config['use_FIFO']
-        self.use_LIFO = config['use_LIFO']
-        self.simulation_time = config['simulation_time']
-        self.warmup_period = config['warmup_period']
+    def __init__(self, env_config):
+        self.env_config = env_config
+        self.Life_time = env_config['life_time']
+        self.Lead_time = env_config['lead_time']
+        self.mean_demand = env_config['mean_demand']
+        self.coefficient_of_variation = env_config['coefficient_of_variation']
+        self.max_order = env_config['max_order']
+        self.order_cost = env_config['order_cost']
+        self.outdated_cost = env_config['outdated_cost']
+        self.lost_sales_cost = env_config['lost_sales_cost']
+        self.holding_cost = env_config['holding_cost']
+        self.use_FIFO = env_config['use_FIFO']
+        self.use_LIFO = env_config['use_LIFO']
+        self.simulation_time = env_config['simulation_time']
+        self.warmup_period = env_config['warmup_period']
         
         self.demand = 0
         self.action = 0
@@ -93,8 +93,8 @@ class RetailEnvironment:
         print(f'Demand encountered: {self.demand}')
         print(f'Costs: {self.reward}')
         
-    def r(self):
+    def random_action(self):
         return random.sample(self.action_space, 1)[0]
     @classmethod
-    def from_dict(cls, config_dict):
-        return cls(config_dict)
+    def from_dict(cls, env_config_dict):
+        return cls(env_config_dict)
