@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from environment_train import RetailEnvironment
 
 config = {
