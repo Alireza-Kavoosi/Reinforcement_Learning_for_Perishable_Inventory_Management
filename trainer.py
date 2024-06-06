@@ -1,5 +1,5 @@
 from environment_train import RetailEnvironment
-from DQN import DQN_Agent
+from DQN import DQNAgent
 
 env_config = {
     'life_time': 10,
