@@ -1,1 +1,1 @@
-# RL paper
+# Learning to Optimize: Reinforcement Learning Strategies for Perishable Inventory Management

@@ -18,7 +18,6 @@ class RetailEnvironment:
         self.use_FIFO = config['use_FIFO']
         self.use_LIFO = config['use_LIFO']
         self.simulation_time = config['simulation_time']
-        self.warmup_period = config['warmup_period']
         
         self.demand = 0
         self.action = 0
@@ -33,7 +32,7 @@ class RetailEnvironment:
         
         self.action_space = list(range(self.max_order + 1))
         
-        np.random.seed(17)
+        #np.random.seed(17)
         print('environment created')
     def step(self, action):
         self.action = action
@@ -93,8 +92,12 @@ class RetailEnvironment:
         print(f'Demand encountered: {self.demand}')
         print(f'Costs: {self.reward}')
         
-    def r(self):
-        return random.sample(self.action_space, 1)[0]
+    def random_action(self):
+        return random.choice(self.action_space)
+    
+    def random_state(self):
+        return [np.random.randint(self.max_order) for _ in range(self.Life_time + self.Lead_time - 1)]
+        
     @classmethod
     def from_dict(cls, config_dict):
         return cls(config_dict)
