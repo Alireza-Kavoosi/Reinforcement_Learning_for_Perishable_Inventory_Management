@@ -21,3 +21,13 @@ DQN_config = {
     'gamma' : 0.99
 }
 env = RetailEnvironment.from_dict(env_config)
+
+agent = DQNAgent(DQN_config)
+
+state = env.reset()
+done = False
+while not done:
+    action = agent.act(state)
+    next_state, reward, done, _ = env.step(action)
+    agent.remember(state, action, reward, next_state, done)
+    state = next_state
