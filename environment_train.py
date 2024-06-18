@@ -18,6 +18,7 @@ class RetailEnvironment:
         self.use_FIFO = config['use_FIFO']
         self.use_LIFO = config['use_LIFO']
         self.simulation_time = config['simulation_time']
+        self.perish_time = config['perish_time'] 
         
         self.demand = 0
         self.action = 0
@@ -61,6 +62,9 @@ class RetailEnvironment:
             demand * self.cost_lost, # lost sales cost
             sum(next_state[i] * self.holding_cost for i in range(self.Life_time+1, self.Lead_time+self.Life_time))
         ] # holding cost
+        
+        perish_cost = sum(min(next_state[i], 0)* self.perish_time for i in range(self.Lead_time, self.Lead_time+self.Life_time))
+        costs.append(perish_cost)
         
         self.reward = -sum(costs) if self.current_time >= self.warmup_period else 0
         self.current_time += 1

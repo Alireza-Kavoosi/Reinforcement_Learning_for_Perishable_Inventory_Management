@@ -1,7 +1,7 @@
 from environment_train import RetailEnvironment
 from DQN import DQNAgent
 
-env_config = {
+config = {
     'life_time': 10,
     'lead_time': 5,
     'mean_demand': 10.0,
@@ -14,13 +14,14 @@ env_config = {
     'use_FIFO': True,
     'use_LIFO': False,
     'simulation_time': 100,
-    'warmup_period': 20
+    'warmup_period': 20,
+    'perish_time': 5
 }
 
 DQN_config = {
     'gamma' : 0.99
 }
-env = RetailEnvironment.from_dict(env_config)
+env = RetailEnvironment.from_dict(config)
 
 agent = DQNAgent(DQN_config)
 
