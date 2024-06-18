@@ -22,7 +22,6 @@ DQN_config = {
     'gamma' : 0.99
 }
 env = RetailEnvironment.from_dict(config)
-
 agent = DQNAgent(DQN_config)
 
 state = env.reset()
