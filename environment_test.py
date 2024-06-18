@@ -99,6 +99,7 @@ class RetailEnvironment:
         
     def random_action(self):
         return random.sample(self.action_space, 1)[0]
+        
     @classmethod
     def from_dict(cls, env_config_dict):
         return cls(env_config_dict)
