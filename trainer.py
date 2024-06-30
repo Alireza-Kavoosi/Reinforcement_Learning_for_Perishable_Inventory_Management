@@ -26,6 +26,7 @@ agent = DQNAgent(DQN_config)
 
 state = env.reset()
 done = False
+
 while not done:
     action = agent.act(state)
     next_state, reward, done, _ = env.step(action)
