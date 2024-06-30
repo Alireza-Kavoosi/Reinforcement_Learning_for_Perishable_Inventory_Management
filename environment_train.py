@@ -101,6 +101,7 @@ class RetailEnvironment:
     
     def random_state(self):
         return [np.random.randint(self.max_order) for _ in range(self.Life_time + self.Lead_time - 1)]
+        
     @classmethod
     def from_dict(cls, config_dict):
         return cls(config_dict)
