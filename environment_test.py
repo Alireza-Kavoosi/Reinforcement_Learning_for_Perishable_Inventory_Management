@@ -33,9 +33,9 @@ class RetailEnvironment:
         self.render_state = self.state.copy()
         
         self.action_space = list(range(self.max_order + 1))
-        
         np.random.seed(17)
         print('environment created')
+        
     def step(self, action):
         self.action = action
         self.demand = round(np.random.gamma(self.shape, self.scale))
